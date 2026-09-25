@@ -1,7 +1,7 @@
 {
   "name": "md-press",
   "version": "0.1.0",
-  "description": "Press Markdown into clean, self-contained HTML pages. No AI, no tokens, works offline.",
+  "description": "Press Markdown into clean pages. Build self-contained HTML, or serve it live and save checkboxes back to the file. No AI, no tokens.",
   "keywords": [
     "markdown",
     "html",
@@ -9,7 +9,8 @@
     "static-site",
     "checklist",
     "offline",
-    "md"
+    "live",
+    "todo"
   ],
   "homepage": "https://github.com/sirasitxp/md-press#readme",
   "bugs": {

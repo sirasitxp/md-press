@@ -11,12 +11,14 @@ npm install
 npm run check     # lint and tests, the same as CI
 ```
 
-Try your change on the showcase page:
+Try your change on the showcase page, both ways:
 
 ```sh
-node bin/md-press.js examples/showcase.md
-open examples/showcase.html
+node bin/md-press.js examples/showcase.md && open examples/showcase.html
+node bin/md-press.js serve examples/showcase.md
 ```
+
+To use your local copy as the `md-press` command, run `npm link`. Undo it with `npm unlink -g md-press`.
 
 Built `.html` files are git-ignored.
 
@@ -27,6 +29,7 @@ Built `.html` files are git-ignored.
 - Put one `/* */` block comment above a function when its design needs explaining. Describe the why, not each line. No per-line comments, and no leading `*` inside the block.
 - Keep the command line thin. Logic belongs in `src/` as plain, testable functions.
 - New runtime dependencies need a strong reason. See [How it works](docs/architecture.md).
+- When you make a choice someone might later question, add an entry to [Decisions](docs/decisions.md).
 
 ESLint enforces the mechanical parts: `npm run lint`.
 

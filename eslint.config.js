@@ -1,7 +1,7 @@
 /*
 Lint rules for md-press. Starts from ESLint's recommended set, runs Node
-globals for the command line and tests, and browser globals for the checklist
-script that ships inside every page. Arguments and variables that start with
+globals for the command line and tests, and browser globals for the page script
+that ships inside built pages. Arguments and variables that start with
 an underscore are allowed to be unused, which is how this codebase marks
 intentionally ignored values.
 */
@@ -26,10 +26,10 @@ module.exports = [
     },
   },
   {
-    files: ["src/template/checklist.js"],
+    files: ["src/template/page.js"],
     languageOptions: {
       sourceType: "script",
-      globals: { ...globals.browser, storageKey: "readonly" },
+      globals: { ...globals.browser, mdPress: "readonly" },
     },
   },
 ];

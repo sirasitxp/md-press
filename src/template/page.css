@@ -1,7 +1,8 @@
 /*
 One quiet reading page. Cool paper and slate ink, a single deep teal accent,
-serif body for long reading and system sans for structure. The checklist
-progress bar is the only element that sits on top of the page.
+serif body for long reading and system sans for structure. The toolbar, with
+checklist progress and live status, is the only element that sits on top of
+the page.
 */
 :root {
   --paper: #f6f7f9;
@@ -11,6 +12,7 @@ progress bar is the only element that sits on top of the page.
   --accent: #0e6b70;
   --code-paper: #eceff4;
   --mark: #d7eeee;
+  --danger: #b3261e;
   --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -28,6 +30,7 @@ progress bar is the only element that sits on top of the page.
     --accent: #62c3c8;
     --code-paper: #1c2029;
     --mark: #1d3a3c;
+    --danger: #f28b82;
   }
 }
 *, *::before, *::after { box-sizing: inherit; }
@@ -63,6 +66,7 @@ li.done { color: var(--muted); }
 
 blockquote { margin-left: 0; padding: 0.1em 0 0.1em 1.1em; border-left: 3px solid var(--accent); color: var(--muted); }
 
+kbd { font: 0.82em var(--mono); padding: 0.1em 0.45em; border: 1px solid var(--rule); border-bottom-width: 2px; border-radius: 4px; background: var(--code-paper); }
 code { font: 0.88em var(--mono); background: var(--code-paper); padding: 0.12em 0.35em; border-radius: 4px; }
 pre { position: relative; background: var(--code-paper); border-radius: 6px; padding: 1em 1.1em; overflow-x: auto; line-height: 1.5; }
 pre code { background: none; padding: 0; font-size: 0.85rem; }
@@ -75,15 +79,18 @@ th { font-weight: 600; border-bottom-width: 2px; }
 
 .progress {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 1;
-  display: flex; align-items: center; gap: 0.9rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem;
   padding: 0.6rem max(1.25rem, calc((100% - 42rem) / 2 + 1.25rem));
   background: var(--paper); border-bottom: 1px solid var(--rule);
   font: 0.85rem var(--sans); color: var(--muted);
 }
-.progress-track { flex: 1; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.progress-track { flex: 1 1 8rem; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
 .progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease; }
 .progress-reset { font: inherit; color: var(--muted); background: none; border: 1px solid var(--rule); border-radius: 4px; padding: 0.15em 0.6em; cursor: pointer; }
 .progress-reset:hover { color: var(--ink); }
+.toolbar-status { margin-left: auto; }
+.toolbar-status.error { color: var(--danger); }
+input.task:disabled { cursor: default; }
 
 footer { max-width: 42rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; font: 0.8rem var(--sans); color: var(--muted); border-top: 1px solid var(--rule); }
 

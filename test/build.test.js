@@ -38,15 +38,16 @@ test("task list items become live checkboxes with a progress bar", () => {
   const page = renderPage("- [ ] open\n- [x] done\n", "list.md");
   assert.equal((page.match(/class="task"/g) || []).length, 2);
   assert.match(page, /<input type="checkbox" class="task" checked>/);
-  assert.doesNotMatch(page, /disabled/);
+  assert.doesNotMatch(page, /<input[^>]*disabled/);
   assert.match(page, /class="progress"/);
-  assert.match(page, /const storageKey = "md-press:list"/);
+  assert.match(page, /"storageKey":"md-press:list"/);
+  assert.match(page, /class="progress-reset"/);
 });
 
 test("pages without tasks get no progress bar or checklist script", () => {
   const page = renderPage("# Plain\n\n- item", "plain.md");
   assert.doesNotMatch(page, /class="progress"/);
-  assert.doesNotMatch(page, /storageKey/);
+  assert.doesNotMatch(page, /mdPress/);
 });
 
 test("code is highlighted and unknown languages fall back to plain text", () => {
@@ -105,4 +106,30 @@ test("command line prints the version", () => {
   const { version } = require("../package.json");
   const output = execFileSync(process.execPath, [commandPath, "--version"], { encoding: "utf8" });
   assert.equal(output.trim(), version);
+});
+
+test("live pages show status instead of reset and are writable when tasks line up", () => {
+  const page = renderPage("# Plan\n\n- [ ] one\n- [x] two\n", "plan.md", { live: { version: "abc" } });
+  assert.match(page, /"live":\{"version":"abc","fileName":"plan.md","writable":true\}/);
+  assert.match(page, /Live, saving to plan.md/);
+  assert.doesNotMatch(page, /class="progress-reset"/);
+});
+
+test("live pages without tasks still get the page script for reloading", () => {
+  const page = renderPage("# Notes\n", "notes.md", { live: { version: "abc" } });
+  assert.match(page, /const mdPress = /);
+  assert.match(page, /Serving notes.md with md-press/);
+});
+
+test("live pages turn read-only when tasks cannot be matched to lines", () => {
+  const indentedCode = "Intro\n\n    - [ ] shown as code, not a checkbox\n\n- [ ] real task\n";
+  const page = renderPage(indentedCode, "mismatch.md", { live: { version: "abc" } });
+  assert.equal((page.match(/class="task"/g) || []).length, 1);
+  assert.match(page, /"writable":false/);
+});
+
+test("file names cannot break out of the inline script", () => {
+  const page = renderPage("- [ ] one\n", "a<b>.md", { live: { version: "abc" } });
+  assert.doesNotMatch(page, /"fileName":"a<b>/);
+  assert.match(page, /"fileName":"a\\u003cb>.md"/);
 });

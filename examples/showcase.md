@@ -11,7 +11,9 @@ The browser tab should say **md-press showcase** (from frontmatter), not the hea
 
 Plain paragraph with **bold**, *italic*, ***both***, ~~strikethrough~~, `inline code`, and a [link to sirux.io](https://sirux.io).
 
-Special characters should show as text, not break the page: <div>, &amp;, "quotes", 'apostrophes', and 5 < 10 > 2.
+Special characters show as text: 5 < 10 > 2, "quotes", 'apostrophes', and a lone & sign. To show a tag as text, wrap it in backticks: `<div>`.
+
+Raw HTML is kept on purpose, so you can use it when Markdown has no syntax: press <kbd>Cmd</kbd> + <kbd>P</kbd> to print.
 
 > A blockquote. It should have a teal bar on the left
 > and wrap across lines cleanly.
@@ -32,7 +34,11 @@ Special characters should show as text, not break the page: <div>, &amp;, "quote
 
 ## Checklist (test these)
 
-Check a few boxes, reload the page, and they should stay checked. The progress bar at the top should update.
+Check a few boxes and watch the progress bar at the top.
+
+**Built** with `md-press showcase.md`, progress saves in this browser and survives a reload. Reset returns to what the file says.
+
+**Served** with `md-press serve showcase.md`, every click saves into this file itself. Edit the file in any editor and the page updates on its own.
 
 - [x] Starts checked
 - [ ] Starts unchecked

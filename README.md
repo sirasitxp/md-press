@@ -4,20 +4,21 @@
 [![npm](https://img.shields.io/npm/v/md-press.svg)](https://www.npmjs.com/package/md-press)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Press Markdown into clean, self-contained HTML pages. Pure code: no AI, no tokens, no build setup.
+Press Markdown into clean pages. Pure code: no AI, no tokens, no build setup.
 
 ```sh
 npm install -g md-press
-md-press notes.md
+md-press notes.md           # build notes.html, a page you can share anywhere
+md-press serve notes.md     # open notes.md live, checkboxes save into the file
 ```
-
-You get `notes.html`: one file with its styles and scripts inlined, ready to open, share, print, or host anywhere.
 
 ## Why
 
-Notes, plans, and trackers live best as Markdown. They read best as a page. md-press turns one into the other in milliseconds, with the same result every time, and works offline.
+Notes, plans, and trackers live best as Markdown. They read best as a page. md-press gives the file a better view without taking it away from you. The file stays the source of truth, readable and editable by people, editors, and agents alike.
 
-## Usage
+## Two ways to use it
+
+### Build: a page to share
 
 ```sh
 md-press notes.md                  # writes notes.html next to notes.md
@@ -25,25 +26,45 @@ md-press docs/*.md --out pages     # builds many files into one folder
 npx md-press notes.md              # runs without installing
 ```
 
-| Option | What it does |
-| --- | --- |
-| `--out <folder>` | Writes pages into this folder instead of next to each file |
-| `-v`, `--version` | Shows the version |
-| `-h`, `--help` | Shows help |
+You get one HTML file with its styles and scripts inlined, ready to open, send, print, or host anywhere. Checklist progress on a built page is saved in the viewer's browser.
 
-`md-press build notes.md` works too. The explicit `build` subcommand leaves room for more modes later.
+### Serve: a live page for working
 
-## What you get
+```sh
+md-press serve notes.md
+```
 
-- **One file.** Styles and scripts are inlined, so the page has no dependencies to lose.
+Opens `notes.md` at `http://localhost:5180`.
+
+- **Checking a box saves `[x]` into the file.** Only that one character changes.
+- **Edit the file anywhere**, in an editor or with an agent, and the page updates on its own, keeping your scroll position.
+- **Safe with other editors.** If the file changed since the page loaded, a save is refused and the page reloads, so no one's edit is overwritten.
+- **Images next to the file show up**, so relative links like `![](screenshot.png)` work.
+
+Stop it with Ctrl+C.
+
+## Options
+
+| Option | Mode | What it does |
+| --- | --- | --- |
+| `--out <folder>` | build | Writes pages into this folder instead of next to each file |
+| `--port <number>` | serve | Port to start from. Default 5180, and the next 9 are tried if it is busy |
+| `--no-open` | serve | Does not open the browser |
+| `-v`, `--version` | any | Shows the version |
+| `-h`, `--help` | any | Shows help |
+
+`md-press build notes.md` works too, same as `md-press notes.md`.
+
+## What every page gets
+
 - **Light and dark mode** that follow the system setting, plus clean print styles.
 - **Readable on phones.** Wide tables and code scroll inside themselves, never the page.
-- **Code highlighting** done at build time, so pages stay fast.
-- **Live checklists.** `- [ ]` items become real checkboxes with a progress bar. Progress is saved in the browser and survives rebuilds. Reset returns to what the file says.
+- **Code highlighting**, done when the page is made, so pages stay fast.
+- **Checklists.** `- [ ]` items become real checkboxes with a progress bar.
 - **Smart titles.** Uses frontmatter `title:`, then the first `#` heading, then the file name.
 - **Diagrams.** ` ```mermaid ` blocks render as diagrams. This is the only feature that loads anything from the network, and only on pages that have a diagram. Offline, the diagram source shows instead.
 
-See [`examples/showcase.md`](examples/showcase.md) for every feature on one page.
+See [`examples/showcase.md`](examples/showcase.md) for every feature on one page. Try it both ways.
 
 ## Frontmatter
 
@@ -67,13 +88,16 @@ buildFile("notes.md", "pages");
 
 ## Good to know
 
-- **Checklist progress is per browser.** It lives in that browser's storage, keyed by file name. It does not write back to the Markdown file.
-- **Raw HTML passes through.** Markdown allows inline HTML, and md-press keeps it. Only press files you trust, the same as opening any HTML file.
+- **Built pages save progress per browser**, keyed by file name. Only `serve` writes to the file.
+- **A served page is read-only if md-press cannot match every checkbox to its line**, for example when a task sits inside an indented code block. It says so in the toolbar rather than risk editing the wrong line.
+- **Raw HTML is kept**, so `<kbd>` and `<details>` work. To show a tag as text, wrap it in backticks. Only press or serve files you trust, the same as opening any HTML file.
+- **`serve` answers only this computer.** It is not reachable from your phone or network.
 - **Requires Node 20 or newer.**
 
 ## Docs
 
 - [How it works](docs/architecture.md)
+- [Decisions](docs/decisions.md)
 - [Roadmap](docs/roadmap.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)

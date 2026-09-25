@@ -1,27 +1,28 @@
 # Roadmap
 
-md-press grows by adding views of the same Markdown file, not by adding features to one view. Every mode keeps the file as the source of truth.
+md-press grows by adding views of the same Markdown file, not by adding features to one view. Every mode keeps the file as the source of truth. Reasons behind these choices are in [Decisions](decisions.md).
 
-## Shipped
+## 0.1
 
-- [x] **0.1** `md-press <file>`: static, self-contained pages
+- [x] `md-press <file>`: static, self-contained pages
+- [x] `md-press serve <file>`: a live page on localhost that saves checkboxes into the file and reloads when the file changes
 
-## Next
+## Next: 0.2
 
-- [ ] **0.2** `md-press board <BACKLOG.md>`: a live Kanban board on localhost that reads and writes the file
+- [ ] `md-press board <BACKLOG.md>`: a live Kanban board built on the same server
   - `##` headings are columns, top-level `- [ ]` items are cards, trailing `` `code` `` spans are tags
-  - Saves check the file's version and refuse if it changed underneath, so people and agents can edit it at the same time
-  - Writes are atomic: a temp file, then a rename
-  - Answers only requests addressed to localhost
+  - Drag cards between columns, edit and add cards, filter by tag
+  - Reuses serve's version checks, atomic writes, and localhost-only rules
   - Round-trip tests prove the file comes back byte for byte
   - The last column counts as done, and tag colors come from the tag name, so it works with any backlog
+- [ ] Publish from GitHub releases with npm trusted publishing, so no tokens are stored anywhere
 
 ## Later
 
-- [ ] `md-press serve <file>`: the static page, but checking a box writes `[x]` back to the file
-- [ ] Watch mode that rebuilds on save
+- [ ] Watch mode for build that rebuilds on save
 - [ ] Table of contents for long pages
 - [ ] Page themes chosen with a flag
+- [ ] Serving to phones on the same network, behind an explicit flag
 
 ## Not planned
 
