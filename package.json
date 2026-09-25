@@ -1,0 +1,50 @@
+{
+  "name": "md-press",
+  "version": "0.1.0",
+  "description": "Press Markdown into clean, self-contained HTML pages. No AI, no tokens, works offline.",
+  "keywords": [
+    "markdown",
+    "html",
+    "cli",
+    "static-site",
+    "checklist",
+    "offline",
+    "md"
+  ],
+  "homepage": "https://github.com/sirasitxp/md-press#readme",
+  "bugs": {
+    "url": "https://github.com/sirasitxp/md-press/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sirasitxp/md-press.git"
+  },
+  "license": "MIT",
+  "author": "Sirasit Thitirattanakorn (Sirux) <sirasit@sirux.io>",
+  "main": "src/build.js",
+  "bin": {
+    "md-press": "bin/md-press.js"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lint": "eslint .",
+    "check": "npm run lint && npm test",
+    "prepublishOnly": "npm run check"
+  },
+  "dependencies": {
+    "highlight.js": "^11.12.0",
+    "marked": "^18.0.14"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^17.12.0"
+  }
+}

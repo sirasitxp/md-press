@@ -1,0 +1,110 @@
+/*
+One quiet reading page. Cool paper and slate ink, a single deep teal accent,
+serif body for long reading and system sans for structure. The checklist
+progress bar is the only element that sits on top of the page.
+*/
+:root {
+  --paper: #f6f7f9;
+  --ink: #1d2330;
+  --muted: #5a6273;
+  --rule: #d9dee6;
+  --accent: #0e6b70;
+  --code-paper: #eceff4;
+  --mark: #d7eeee;
+  --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  color-scheme: light dark;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #14171d;
+    --ink: #e3e6eb;
+    --muted: #9aa2b1;
+    --rule: #2c323d;
+    --accent: #62c3c8;
+    --code-paper: #1c2029;
+    --mark: #1d3a3c;
+  }
+}
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1.0625rem/1.7 var(--serif);
+  -webkit-text-size-adjust: 100%;
+}
+main { max-width: 42rem; margin: 0 auto; padding: 3.5rem 1.25rem 2rem; }
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--sans); line-height: 1.25; margin: 2.2em 0 0.6em; letter-spacing: -0.01em; }
+h1 { font-size: 2.1rem; margin-top: 0; font-weight: 700; }
+h2 { font-size: 1.45rem; padding-bottom: 0.3em; border-bottom: 1px solid var(--rule); }
+h3 { font-size: 1.15rem; }
+h4, h5, h6 { font-size: 1rem; color: var(--muted); }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1.1em; }
+
+a { color: var(--accent); text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+strong { font-weight: 700; }
+mark { background: var(--mark); color: inherit; padding: 0 0.15em; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; }
+img { max-width: 100%; height: auto; }
+
+ul, ol { padding-left: 1.4em; }
+li + li { margin-top: 0.25em; }
+li:has(> input.task) { list-style: none; margin-left: -1.4em; padding-left: 1.9em; text-indent: -1.9em; }
+input.task { width: 1.05em; height: 1.05em; margin: 0 0.75em 0 0; vertical-align: -0.12em; accent-color: var(--accent); cursor: pointer; text-indent: 0; }
+li.done { color: var(--muted); }
+
+blockquote { margin-left: 0; padding: 0.1em 0 0.1em 1.1em; border-left: 3px solid var(--accent); color: var(--muted); }
+
+code { font: 0.88em var(--mono); background: var(--code-paper); padding: 0.12em 0.35em; border-radius: 4px; }
+pre { position: relative; background: var(--code-paper); border-radius: 6px; padding: 1em 1.1em; overflow-x: auto; line-height: 1.5; }
+pre code { background: none; padding: 0; font-size: 0.85rem; }
+pre[data-language]::after { content: attr(data-language); position: absolute; top: 0.4em; right: 0.7em; font: 0.72rem var(--sans); color: var(--muted); }
+pre.mermaid { background: none; text-align: center; font-family: var(--sans); }
+
+table { display: block; overflow-x: auto; border-collapse: collapse; font: 0.95rem/1.5 var(--sans); }
+th, td { padding: 0.5em 0.9em; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+th { font-weight: 600; border-bottom-width: 2px; }
+
+.progress {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 1;
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.6rem max(1.25rem, calc((100% - 42rem) / 2 + 1.25rem));
+  background: var(--paper); border-bottom: 1px solid var(--rule);
+  font: 0.85rem var(--sans); color: var(--muted);
+}
+.progress-track { flex: 1; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease; }
+.progress-reset { font: inherit; color: var(--muted); background: none; border: 1px solid var(--rule); border-radius: 4px; padding: 0.15em 0.6em; cursor: pointer; }
+.progress-reset:hover { color: var(--ink); }
+
+footer { max-width: 42rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; font: 0.8rem var(--sans); color: var(--muted); border-top: 1px solid var(--rule); }
+
+.hljs-comment, .hljs-quote { color: var(--muted); font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-literal { color: #7a3fb0; }
+.hljs-string, .hljs-attr, .hljs-template-tag, .hljs-addition { color: #2e7d32; }
+.hljs-number, .hljs-symbol, .hljs-variable, .hljs-template-variable { color: #b25b00; }
+.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id, .hljs-selector-class { color: #0b5cad; }
+.hljs-type, .hljs-meta, .hljs-deletion { color: #b3261e; }
+@media (prefers-color-scheme: dark) {
+  .hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-literal { color: #c79bf2; }
+  .hljs-string, .hljs-attr, .hljs-template-tag, .hljs-addition { color: #8fd694; }
+  .hljs-number, .hljs-symbol, .hljs-variable, .hljs-template-variable { color: #f0b36b; }
+  .hljs-title, .hljs-section, .hljs-name, .hljs-selector-id, .hljs-selector-class { color: #7fb8f5; }
+  .hljs-type, .hljs-meta, .hljs-deletion { color: #f28b82; }
+}
+
+@media (prefers-reduced-motion: reduce) { .progress-fill { transition: none; } }
+@media print {
+  .progress { display: none; }
+  body { background: #fff; color: #000; }
+  main { padding-top: 0; }
+  a { color: inherit; }
+}

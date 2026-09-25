@@ -1,0 +1,5 @@
+node_modules/
+*.tgz
+.DS_Store
+# Pages built while trying things out
+*.html
