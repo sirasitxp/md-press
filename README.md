@@ -1,13 +1,13 @@
 # md-press
 
 [![Test](https://github.com/sirasitxp/md-press/actions/workflows/test.yml/badge.svg)](https://github.com/sirasitxp/md-press/actions/workflows/test.yml)
-[![npm](https://img.shields.io/npm/v/md-press.svg)](https://www.npmjs.com/package/md-press)
+[![npm](https://img.shields.io/npm/v/@sirux/md-press.svg)](https://www.npmjs.com/package/@sirux/md-press)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Press Markdown into clean pages. Pure code: no AI, no tokens, no build setup.
 
 ```sh
-npm install -g md-press
+npm install -g @sirux/md-press
 md-press notes.md           # build notes.html, a page you can share anywhere
 md-press serve notes.md     # open notes.md live, checkboxes save into the file
 ```
@@ -23,7 +23,7 @@ Notes, plans, and trackers live best as Markdown. They read best as a page. md-p
 ```sh
 md-press notes.md                  # writes notes.html next to notes.md
 md-press docs/*.md --out pages     # builds many files into one folder
-npx md-press notes.md              # runs without installing
+npx @sirux/md-press notes.md       # runs without installing
 ```
 
 You get one HTML file with its styles and scripts inlined, ready to open, send, print, or host anywhere. Checklist progress on a built page is saved in the viewer's browser.
@@ -80,7 +80,7 @@ description: Owners, dates, and open risks
 ## Use it from code
 
 ```js
-const { renderPage, buildFile } = require("md-press");
+const { renderPage, buildFile } = require("@sirux/md-press");
 
 const html = renderPage("# Hello\n\n- [ ] Ship it", "hello.md");
 buildFile("notes.md", "pages");
@@ -92,6 +92,7 @@ buildFile("notes.md", "pages");
 - **A served page is read-only if md-press cannot match every checkbox to its line**, for example when a task sits inside an indented code block. It says so in the toolbar rather than risk editing the wrong line.
 - **Raw HTML is kept**, so `<kbd>` and `<details>` work. To show a tag as text, wrap it in backticks. Only press or serve files you trust, the same as opening any HTML file.
 - **`serve` answers only this computer.** It is not reachable from your phone or network.
+- **The package is `@sirux/md-press`, the command is `md-press`.** npm reserves plain `md-press` because it is close to an older, unrelated package.
 - **Requires Node 20 or newer.**
 
 ## Docs

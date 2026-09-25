@@ -2,6 +2,14 @@
 
 Why md-press is the way it is. Newest first. Each entry records what was decided, why, and what was traded away, so later changes can revisit a choice on purpose instead of by accident.
 
+## 2026-09-25: Publish as `@sirux/md-press`
+
+**Decision.** The npm package is `@sirux/md-press`, under a Sirux npm organization. The command stays `md-press`.
+
+**Why.** npm refused the plain name `md-press` as too similar to the existing `mdpress`. A scope avoids the clash, and the Sirux organization gives every future Sirux tool one home and one brand.
+
+**Trade-off.** A longer install line (`npm install -g @sirux/md-press`). Nothing changes once it is installed.
+
 ## 2026-09-25: Ship `serve` in 0.1.0
 
 **Decision.** Add `md-press serve <file.md>`, a live page on localhost that saves checkbox changes into the Markdown file and reloads when the file changes on disk. It ships in the first release instead of waiting.
@@ -58,7 +66,7 @@ Why md-press is the way it is. Newest first. Each entry records what was decided
 
 ## 2026-09-25: Name, license, and home
 
-**Decision.** Published as `md-press` on npm (`mdpress` was taken), MIT license, repository at `github.com/sirasitxp/md-press`, made by Sirux.
+**Decision.** Named `md-press`, MIT license, repository at `github.com/sirasitxp/md-press`, made by Sirux. (The npm package name was later scoped, see above.)
 
 **Why.** The name says what it does. MIT is the norm for npm tools, and npm packages ship readable source anyway.
 

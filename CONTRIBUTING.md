@@ -18,7 +18,7 @@ node bin/md-press.js examples/showcase.md && open examples/showcase.html
 node bin/md-press.js serve examples/showcase.md
 ```
 
-To use your local copy as the `md-press` command, run `npm link`. Undo it with `npm unlink -g md-press`.
+To use your local copy as the `md-press` command, run `npm link`. Undo it with `npm unlink -g @sirux/md-press`.
 
 Built `.html` files are git-ignored.
 

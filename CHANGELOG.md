@@ -2,7 +2,7 @@
 
 ## 0.1.0
 
-First release.
+First release, published as `@sirux/md-press`. The command is `md-press`.
 
 ### Build
 

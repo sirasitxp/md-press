@@ -1,5 +1,5 @@
 {
-  "name": "md-press",
+  "name": "@sirux/md-press",
   "version": "0.1.0",
   "description": "Press Markdown into clean pages. Build self-contained HTML, or serve it live and save checkboxes back to the file. No AI, no tokens.",
   "keywords": [
@@ -47,5 +47,8 @@
     "@eslint/js": "^9.39.5",
     "eslint": "^9.39.5",
     "globals": "^17.12.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
